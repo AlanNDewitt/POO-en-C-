@@ -1,0 +1,237 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+
+
+
+class Articulo
+{
+
+private:
+
+	int codigo[10];
+	float precio[10];
+	int cuenta=0;
+
+	short x;
+
+public:
+	 
+	void asigna()
+	{
+		if (cuenta<=10)
+		{
+			cout<<"Ingresa el Codigo del Articulo "<<cuenta+1<<": ";
+			cin>>codigo[cuenta];
+
+			cout<<"\n\n\n";
+
+			cout<<"Ingresa el Precio del Articulo "<<cuenta+1<<": ";
+			cin>>precio[cuenta];
+
+			cuenta++;
+			
+		}
+
+		else
+		{
+			cout<<"No hay mas espacio";
+		}
+		
+
+		cout<<"\n\n\n\n\n";
+		cout<<"Ingresa 1 para continuar... : ";
+		cin>>x;
+
+	}
+
+
+	void suma_precios()
+	{
+		float Total=0;
+
+		for (int i = 0; i < cuenta; ++i)
+		{
+			Total = Total + precio[i];
+			
+		}
+
+		cout<<"el Precio Total es : $"<<Total;
+
+		
+
+		cout<<"\n\n\n\n\n";
+		cout<<"Ingresa 1 para continuar... : ";
+		cin>>x;
+	}
+
+
+	void Mostrar_Articulos()
+	{
+		if (cuenta > 0)
+		{
+			cout<<"Codigo\t\tPrecio";
+
+			for (int j = 0; j < cuenta; ++j)
+			{
+				cout<<"\n"<<codigo[j]<<"\t\t $"<<precio[j]<<"\n";
+			}
+		}
+		
+		else
+		{
+			cout<<"Todavia no hay Articulos !";
+		}
+
+		cout<<"\n\n\n\n\n";
+		cout<<"Ingresa 1 para continuar... : ";
+		cin>>x;
+	}
+
+
+	void Eliminar_articulo()
+	{
+		short code;
+
+		bool encontrado=false;
+
+		if (cuenta > 0)
+		{
+			cout<<"Ingresa el codigo del articulo : ";
+			cin>>code;
+
+			for (int k = 0; k < cuenta; ++k)
+			{
+				if (code == codigo[k])
+				{
+					for (int w = k; w < cuenta; ++w)
+					{
+						codigo[w] = codigo[w+1];
+
+						precio[w] = precio[w+1];
+
+					}
+
+					encontrado = true;
+
+					cuenta--;
+				}
+
+			}
+
+
+			if (encontrado == true)
+			{
+	
+				cout<<"\n\nEliminacion exitosa";	
+			}
+
+
+			else
+			{
+				cout<<"\n\nNO se encontro ninguno";
+			}
+			
+		}
+
+		else
+		{
+			cout<<"Todavia no hay Articulos !";
+		}
+
+		
+
+			cout<<"\n\n\n\n\n";
+			cout<<"Ingresa 1 para continuar... : ";
+			cin>>x;
+
+	}
+
+
+
+	void menu(short *opc)
+	{
+		system("clear");
+
+		//short opc;
+
+		cout<<"\n\n\n";
+		cout<<"\t\t\t|| OPERACIONES ||";
+		cout<<"\n\n\n";
+		cout<<"\t\t\t1.-Agregar Articulo\n\n";
+		cout<<"\t\t\t2.-Suma de Precios\n\n";
+		cout<<"\t\t\t3.-Mostrar Articulos\n\n";
+		cout<<"\t\t\t4.-Eliminar\n\n";
+		cout<<"\t\t\t5.-Salir\n\n\n\t\t\t:";
+
+		cin>>*opc;
+
+		system("clear");
+
+		switch (*opc)
+		{
+
+			case 1 : 
+
+					 asigna();
+					 system("clear");
+
+
+			 							break;
+
+			case 2 : 
+
+					 suma_precios();
+					 system("clear");
+
+			 							break;
+
+			case 3 : 
+
+					 Mostrar_Articulos();
+					 system("clear");
+
+			 							break;
+
+			case 4 : 
+
+					 Eliminar_articulo();
+					 system("clear");
+
+			 						break;
+		}
+
+
+
+		if (*opc > 5 && *opc< 1)
+		{
+			cout<<"\n\n\nopcion Incorrecta";
+		}
+
+
+	}
+
+	
+};
+
+
+int main()
+{
+	short opcion;
+
+	Articulo articulos;
+	
+	do
+	{
+		articulos.menu(&opcion);
+		
+	} while (opcion !=5);
+	
+	
+	return 0;
+}
+
+
+
+
+
